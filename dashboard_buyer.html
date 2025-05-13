@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buyer Dashboard - EcoPoints</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/buyer.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <i class="fas fa-leaf"></i>
+          <h2>EcoPoints</h2>
+        </div>
+        <button class="close-sidebar">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="user-info">
+        <div class="user-avatar">
+          <i class="fas fa-store"></i>
+        </div>
+        <div class="user-details">
+          <h3 id="user-name">GreenMart</h3>
+          <p id="user-type">Buyer</p>
+        </div>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <ul>
+          <li class="active">
+            <a href="#overview">
+              <i class="fas fa-home"></i>
+              <span>Overview</span>
+            </a>
+          </li>
+          <li>
+            <a href="#redemptions">
+              <i class="fas fa-ticket-alt"></i>
+              <span>Redemption Requests</span>
+            </a>
+          </li>
+          <li>
+            <a href="#customers">
+              <i class="fas fa-users"></i>
+              <span>Nearby Customers</span>
+            </a>
+          </li>
+          <li>
+            <a href="#analytics">
+              <i class="fas fa-chart-bar"></i>
+              <span>Analytics</span>
+            </a>
+          </li>
+          <li>
+            <a href="#settings">
+              <i class="fas fa-cog"></i>
+              <span>Settings</span>
+            </a>
+          </li>
+          <li class="logout">
+            <a href="#" id="logout-btn">
+              <i class="fas fa-sign-out-alt"></i>
+              <span>Logout</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <header class="dashboard-header">
+        <button class="menu-toggle">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="search-bar">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search...">
+        </div>
+        <div class="header-actions">
+          <button class="notification-bell">
+            <i class="fas fa-bell"></i>
+            <span class="badge">5</span>
+          </button>
+          <div class="user-dropdown">
+            <div class="user-avatar small">
+              <i class="fas fa-store"></i>
+            </div>
+            <span class="username" id="header-username">GreenMart</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+      </header>
+
+      <!-- Dashboard Content -->
+      <div class="dashboard-content" id="overview">
+        <h1 class="page-title">Buyer Dashboard</h1>
+        
+        <div class="stats-container">
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fas fa-ticket-alt"></i>
+            </div>
+            <div class="stat-details">
+              <h3>New Redemptions</h3>
+              <p class="stat-value" id="new-redemptions">8</p>
+              <p class="stat-change positive">+3 from yesterday</p>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="stat-details">
+              <h3>Active Customers</h3>
+              <p class="stat-value" id="active-customers">147</p>
+              <p class="stat-change positive">+12 this week</p>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fas fa-money-bill-wave"></i>
+            </div>
+            <div class="stat-details">
+              <h3>Total Redeemed</h3>
+              <p class="stat-value" id="total-redeemed">$1,245</p>
+              <p class="stat-change positive">+$245 this month</p>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="stat-details">
+              <h3>Conversion Rate</h3>
+              <p class="stat-value" id="conversion-rate">78%</p>
+              <p class="stat-change positive">+5% this month</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="overview-panels">
+          <div class="panel pending-redemptions">
+            <div class="panel-header">
+              <h2>Pending Redemptions</h2>
+              <a href="#redemptions" class="view-all">View All</a>
+            </div>
+            <div class="panel-body">
+              <div class="pending-redemptions-list" id="pending-redemptions-list">
+                <!-- Content will be populated by JavaScript -->
+              </div>
+            </div>
+          </div>
+          
+          <div class="panel recent-activity">
+            <div class="panel-header">
+              <h2>Recent Activity</h2>
+              <a href="#" class="view-all">View All</a>
+            </div>
+            <div class="panel-body">
+              <div class="activity-list" id="recent-activities">
+                <!-- Content will be populated by JavaScript -->
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="waste-distribution">
+          <div class="panel-header">
+            <h2>Popular Waste Categories</h2>
+          </div>
+          <div class="chart-container">
+            <div class="donut-chart" id="waste-chart">
+              <div class="donut-segment" style="--offset: 0; --value: 45; --bg: var(--color-plastic);">
+                <div class="donut-label">45%</div>
+              </div>
+              <div class="donut-segment" style="--offset: 45; --value: 30; --bg: var(--color-metal);">
+                <div class="donut-label">30%</div>
+              </div>
+              <div class="donut-segment" style="--offset: 75; --value: 15; --bg: var(--color-organic);">
+                <div class="donut-label">15%</div>
+              </div>
+              <div class="donut-segment" style="--offset: 90; --value: 10; --bg: var(--color-ewaste);">
+                <div class="donut-label">10%</div>
+              </div>
+              <div class="donut-hole">
+                <div class="donut-text">Total<br>542 items</div>
+              </div>
+            </div>
+            <div class="chart-legend">
+              <div class="legend-item">
+                <div class="legend-color" style="background-color: var(--color-plastic);"></div>
+                <div class="legend-text">Plastic</div>
+              </div>
+              <div class="legend-item">
+                <div class="legend-color" style="background-color: var(--color-metal);"></div>
+                <div class="legend-text">Metal</div>
+              </div>
+              <div class="legend-item">
+                <div class="legend-color" style="background-color: var(--color-organic);"></div>
+                <div class="legend-text">Organic</div>
+              </div>
+              <div class="legend-item">
+                <div class="legend-color" style="background-color: var(--color-ewaste);"></div>
+                <div class="legend-text">E-Waste</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Redemption Requests Section -->
+      <div class="dashboard-content hidden" id="redemptions">
+        <h1 class="page-title">Redemption Requests</h1>
+        
+        <div class="filter-controls">
+          <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" id="redemption-search" placeholder="Search by customer...">
+          </div>
+          
+          <div class="filter-group">
+            <label for="redemption-status-filter">Status:</label>
+            <select id="redemption-status-filter">
+              <option value="all">All</option>
+              <option value="pending">Pending</option>
+              <option value="accepted">Accepted</option>
+              <option value="rejected">Rejected</option>
+            </select>
+          </div>
+          
+          <div class="filter-group">
+            <label for="redemption-date-filter">Date Range:</label>
+            <select id="redemption-date-filter">
+              <option value="all">All Time</option>
+              <option value="today">Today</option>
+              <option value="week">This Week</option>
+              <option value="month">This Month</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="redemption-requests-container">
+          <table class="redemption-table">
+            <thead>
+              <tr>
+                <th>Customer</th>
+                <th>Reward</th>
+                <th>Points</th>
+                <th>Requested On</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="redemption-requests-body">
+              <!-- Content will be populated by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="pagination">
+          <button class="pagination-btn" id="prev-page">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <div class="pagination-pages" id="pagination-pages">
+            <button class="page-number active">1</button>
+            <button class="page-number">2</button>
+            <button class="page-number">3</button>
+          </div>
+          <button class="pagination-btn" id="next-page">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Nearby Customers Section -->
+      <div class="dashboard-content hidden" id="customers">
+        <h1 class="page-title">Nearby Customers</h1>
+        
+        <div class="filter-controls">
+          <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" id="customer-search" placeholder="Search customers...">
+          </div>
+          
+          <div class="filter-group">
+            <label for="points-filter">Points:</label>
+            <select id="points-filter">
+              <option value="all">All Points</option>
+              <option value="high">High Points (200+)</option>
+              <option value="medium">Medium Points (100-199)</option>
+              <option value="low">Low Points (0-99)</option>
+            </select>
+          </div>
+          
+          <div class="filter-group">
+            <label for="distance-filter">Distance:</label>
+            <select id="distance-filter">
+              <option value="all">All</option>
+              <option value="near">Within 5 km</option>
+              <option value="medium">5-10 km</option>
+              <option value="far">10+ km</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="customer-cards" id="customer-cards">
+          <!-- Content will be populated by JavaScript -->
+        </div>
+        
+        <div class="map-container">
+          <div class="map-header">
+            <h2>Customer Distribution Map</h2>
+            <div class="map-controls">
+              <button class="btn secondary" id="refresh-map">
+                <i class="fas fa-sync-alt"></i> Refresh
+              </button>
+            </div>
+          </div>
+          <div class="map-placeholder" id="customer-map">
+            <div class="map-overlay">
+              <i class="fas fa-map-marker-alt"></i>
+              <p>Map shows customer distribution in your area</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Analytics Section -->
+      <div class="dashboard-content hidden" id="analytics">
+        <h1 class="page-title">Analytics & Insights</h1>
+        
+        <div class="analytics-controls">
+          <div class="filter-group">
+            <label for="analytics-period">Time Period:</label>
+            <select id="analytics-period">
+              <option value="week">Last 7 Days</option>
+              <option value="month" selected>Last 30 Days</option>
+              <option value="quarter">Last 3 Months</option>
+              <option value="year">Last Year</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="analytics-panels">
+          <div class="analytics-panel">
+            <div class="panel-header">
+              <h2>Redemption Trends</h2>
+            </div>
+            <div class="panel-body">
+              <div class="chart-container">
+                <div class="chart-placeholder" id="redemption-chart">
+                  <div class="chart-bars">
+                    <div class="chart-bar" style="--height: 20%"><span>Mon</span></div>
+                    <div class="chart-bar" style="--height: 60%"><span>Tue</span></div>
+                    <div class="chart-bar" style="--height: 40%"><span>Wed</span></div>
+                    <div class="chart-bar" style="--height: 75%"><span>Thu</span></div>
+                    <div class="chart-bar" style="--height: 90%"><span>Fri</span></div>
+                    <div class="chart-bar" style="--height: 50%"><span>Sat</span></div>
+                    <div class="chart-bar" style="--height: 30%"><span>Sun</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="analytics-panel">
+            <div class="panel-header">
+              <h2>Category Breakdown</h2>
+            </div>
+            <div class="panel-body">
+              <div class="chart-container">
+                <div class="chart-placeholder" id="category-chart">
+                  <div class="horizontal-bars">
+                    <div class="horizontal-bar">
+                      <div class="bar-label">Plastic</div>
+                      <div class="bar-container">
+                        <div class="bar-fill" style="width: 75%;">75%</div>
+                      </div>
+                    </div>
+                    <div class="horizontal-bar">
+                      <div class="bar-label">Metal</div>
+                      <div class="bar-container">
+                        <div class="bar-fill" style="width: 50%;">50%</div>
+                      </div>
+                    </div>
+                    <div class="horizontal-bar">
+                      <div class="bar-label">Organic</div>
+                      <div class="bar-container">
+                        <div class="bar-fill" style="width: 35%;">35%</div>
+                      </div>
+                    </div>
+                    <div class="horizontal-bar">
+                      <div class="bar-label">E-Waste</div>
+                      <div class="bar-container">
+                        <div class="bar-fill" style="width: 60%;">60%</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="analytics-metrics">
+          <div class="metrics-card">
+            <h3>Top Performing Rewards</h3>
+            <table class="metrics-table">
+              <thead>
+                <tr>
+                  <th>Reward</th>
+                  <th>Redemptions</th>
+                  <th>Popularity</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>$10 Shopping Voucher</td>
+                  <td>142</td>
+                  <td>
+                    <div class="progress-bar">
+                      <div class="progress" style="width: 85%;"></div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Free Coffee</td>
+                  <td>98</td>
+                  <td>
+                    <div class="progress-bar">
+                      <div class="progress" style="width: 60%;"></div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Cash Reward</td>
+                  <td>76</td>
+                  <td>
+                    <div class="progress-bar">
+                      <div class="progress" style="width: 45%;"></div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>$5 Discount Voucher</td>
+                  <td>53</td>
+                  <td>
+                    <div class="progress-bar">
+                      <div class="progress" style="width: 30%;"></div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <div class="metrics-card">
+            <h3>Customer Demographics</h3>
+            <div class="demographics-chart">
+              <div class="pie-chart">
+                <div class="pie-slice" style="--offset: 0; --value: 45;"></div>
+                <div class="pie-slice" style="--offset: 45; --value: 25;"></div>
+                <div class="pie-slice" style="--offset: 70; --value: 30;"></div>
+              </div>
+              <div class="demographics-legend">
+                <div class="legend-item">
+                  <div class="legend-color" style="background-color: var(--color-primary);"></div>
+                  <div class="legend-text">18-30 years (45%)</div>
+                </div>
+                <div class="legend-item">
+                  <div class="legend-color" style="background-color: var(--color-secondary);"></div>
+                  <div class="legend-text">31-45 years (25%)</div>
+                </div>
+                <div class="legend-item">
+                  <div class="legend-color" style="background-color: var(--color-accent);"></div>
+                  <div class="legend-text">46+ years (30%)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="export-actions">
+          <button class="btn secondary">
+            <i class="fas fa-download"></i> Export Report
+          </button>
+          <button class="btn primary">
+            <i class="fas fa-envelope"></i> Email Report
+          </button>
+        </div>
+      </div>
+    </main>
+  </div>
+  
+  <!-- Modal Templates -->
+  <div class="modal-container" id="redemption-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Redemption Request Details</h2>
+        <button class="close-modal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="redemption-details">
+          <div class="customer-info">
+            <div class="user-avatar">
+              <i class="fas fa-user"></i>
+            </div>
+            <div>
+              <h3 id="modal-customer-name">Jessica Thompson</h3>
+              <p id="modal-customer-id">Customer ID: #12345</p>
+            </div>
+          </div>
+          
+          <div class="reward-details">
+            <div class="detail-item">
+              <span class="detail-label">Reward:</span>
+              <span class="detail-value" id="modal-reward">$10 Shopping Voucher</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Points:</span>
+              <span class="detail-value" id="modal-points">100 points</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Date Requested:</span>
+              <span class="detail-value" id="modal-date">May 15, 2025 at 2:30 PM</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Redemption Method:</span>
+              <span class="detail-value" id="modal-method">QR Code</span>
+            </div>
+          </div>
+          
+          <div class="customer-history">
+            <h4>Customer History</h4>
+            <div class="history-item">
+              <span class="detail-label">Total Redemptions:</span>
+              <span class="detail-value" id="modal-total-redemptions">8</span>
+            </div>
+            <div class="history-item">
+              <span class="detail-label">Current Points Balance:</span>
+              <span class="detail-value" id="modal-points-balance">245 points</span>
+            </div>
+            <div class="history-item">
+              <span class="detail-label">Previous Visit:</span>
+              <span class="detail-value" id="modal-previous-visit">May 5, 2025</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn danger" id="reject-redemption">Reject</button>
+        <button class="btn primary" id="accept-redemption">Accept Redemption</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal-container" id="qr-scanner-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Scan QR Code</h2>
+        <button class="close-modal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="scanner-container">
+          <div class="scanner-frame">
+            <div class="scanner-overlay">
+              <div class="scanner-line"></div>
+            </div>
+          </div>
+          <p>Point the camera at customer's QR code</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn secondary" id="cancel-scan">Cancel</button>
+        <button class="btn primary" id="manual-entry">Manual Entry</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Toast Notification -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="js/main.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/buyer-dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Dashboard - EcoPoints</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/customer.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <i class="fas fa-leaf"></i>
+          <h2>EcoPoints</h2>
+        </div>
+        <button class="close-sidebar">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="user-info">
+        <div class="user-avatar">
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="user-details">
+          <h3 id="user-name">John Doe</h3>
+          <p id="user-type">Customer</p>
+        </div>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <ul>
+          <li class="active">
+            <a href="#overview">
+              <i class="fas fa-home"></i>
+              <span>Overview</span>
+            </a>
+          </li>
+          <li>
+            <a href="#upload-waste">
+              <i class="fas fa-upload"></i>
+              <span>Upload Waste</span>
+            </a>
+          </li>
+          <li>
+            <a href="#history">
+              <i class="fas fa-history"></i>
+              <span>Upload History</span>
+            </a>
+          </li>
+          <li>
+            <a href="#redeem">
+              <i class="fas fa-gift"></i>
+              <span>Redeem Points</span>
+            </a>
+          </li>
+          <li>
+            <a href="#leaderboard">
+              <i class="fas fa-trophy"></i>
+              <span>Leaderboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="#settings">
+              <i class="fas fa-cog"></i>
+              <span>Settings</span>
+            </a>
+          </li>
+          <li class="logout">
+            <a href="#" id="logout-btn">
+              <i class="fas fa-sign-out-alt"></i>
+              <span>Logout</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <header class="dashboard-header">
+        <button class="menu-toggle">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="search-bar">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search...">
+        </div>
+        <div class="header-actions">
+          <button class="notification-bell">
+            <i class="fas fa-bell"></i>
+            <span class="badge">3</span>
+          </button>
+          <div class="user-dropdown">
+            <div class="user-avatar small">
+              <i class="fas fa-user"></i>
+            </div>
+            <span class="username" id="header-username">John Doe</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+      </header>
+
+      <!-- Dashboard Content -->
+      <div class="dashboard-content" id="overview">
+        <h1 class="page-title">Dashboard Overview</h1>
+        
+        <div class="stats-container">
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fas fa-coins"></i>
+            </div>
+            <div class="stat-details">
+              <h3>Total Points</h3>
+              <p class="stat-value" id="total-points">245</p>
+              <p class="stat-change positive">+25 points this week</p>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fas fa-recycle"></i>
+            </div>
+            <div class="stat-details">
+              <h3>Waste Uploads</h3>
+              <p class="stat-value" id="total-uploads">17</p>
+              <p class="stat-change positive">+3 this week</p>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fas fa-money-bill-wave"></i>
+            </div>
+            <div class="stat-details">
+              <h3>Redeemed Value</h3>
+              <p class="stat-value" id="redeemed-value">$15.50</p>
+              <p class="stat-change">0 this week</p>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fas fa-trophy"></i>
+            </div>
+            <div class="stat-details">
+              <h3>Rank</h3>
+              <p class="stat-value" id="user-rank">14th</p>
+              <p class="stat-change positive">+2 positions</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="recent-activity">
+          <div class="section-header">
+            <h2>Recent Activity</h2>
+            <a href="#history" class="view-all">View All</a>
+          </div>
+          
+          <div class="activity-list" id="recent-activities">
+            <!-- Activity entries will be populated by JavaScript -->
+          </div>
+        </div>
+        
+        <div class="recommended-actions">
+          <div class="section-header">
+            <h2>Recommended Actions</h2>
+          </div>
+          
+          <div class="action-cards">
+            <div class="action-card">
+              <div class="action-icon">
+                <i class="fas fa-camera"></i>
+              </div>
+              <div class="action-details">
+                <h3>Upload Waste Photo</h3>
+                <p>Upload a new photo to earn more points.</p>
+                <a href="#upload-waste" class="btn primary">Upload Now</a>
+              </div>
+            </div>
+            
+            <div class="action-card">
+              <div class="action-icon">
+                <i class="fas fa-star"></i>
+              </div>
+              <div class="action-details">
+                <h3>Invite Friends</h3>
+                <p>Get 50 bonus points for each friend who joins.</p>
+                <a href="#" class="btn secondary">Invite Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Upload Waste Section -->
+      <div class="dashboard-content hidden" id="upload-waste">
+        <h1 class="page-title">Upload Waste Photo</h1>
+        
+        <div class="upload-container">
+          <div class="upload-area" id="upload-area">
+            <div class="upload-placeholder">
+              <i class="fas fa-cloud-upload-alt"></i>
+              <h3>Drop your image here</h3>
+              <p>or</p>
+              <label for="waste-photo" class="btn primary">Browse Files</label>
+              <input type="file" id="waste-photo" accept="image/*" hidden>
+            </div>
+            <div class="upload-preview hidden" id="upload-preview">
+              <img id="preview-image" src="" alt="Preview">
+              <button class="btn secondary" id="change-photo">Change Photo</button>
+            </div>
+          </div>
+          
+          <div class="waste-info-container hidden" id="waste-info">
+            <h2>Waste Classification</h2>
+            
+            <div class="classification-result">
+              <div class="classification-icon" id="waste-icon">
+                <i class="fas fa-wine-bottle"></i>
+              </div>
+              <div class="classification-details">
+                <h3>Waste Type: <span id="waste-type">Plastic</span></h3>
+                <p>Points Earned: <span id="waste-points">10</span></p>
+                <div class="classification-description" id="waste-description">
+                  Plastic waste includes bottles, containers, and packaging materials.
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="waste-notes">Additional Notes (optional)</label>
+              <textarea id="waste-notes" rows="3" placeholder="Add any notes about your waste..."></textarea>
+            </div>
+            
+            <div class="upload-actions">
+              <button class="btn secondary" id="cancel-upload">Cancel</button>
+              <button class="btn primary" id="confirm-upload">Confirm and Save</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="waste-guidelines">
+          <h3>Guidelines for Waste Photos</h3>
+          <ul>
+            <li>Ensure the waste is clearly visible in the photo</li>
+            <li>Take photos in good lighting conditions</li>
+            <li>Clean waste before photographing for better classification</li>
+            <li>Include only one type of waste in each photo</li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- History Section -->
+      <div class="dashboard-content hidden" id="history">
+        <h1 class="page-title">Upload History</h1>
+        
+        <div class="filter-controls">
+          <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" id="history-search" placeholder="Search by waste type...">
+          </div>
+          
+          <div class="filter-group">
+            <label for="date-filter">Date Range:</label>
+            <select id="date-filter">
+              <option value="all">All Time</option>
+              <option value="week">This Week</option>
+              <option value="month">This Month</option>
+              <option value="year">This Year</option>
+            </select>
+          </div>
+          
+          <div class="filter-group">
+            <label for="type-filter">Waste Type:</label>
+            <select id="type-filter">
+              <option value="all">All Types</option>
+              <option value="plastic">Plastic</option>
+              <option value="metal">Metal</option>
+              <option value="organic">Organic</option>
+              <option value="e-waste">E-Waste</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="history-table-container">
+          <table class="history-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Waste Type</th>
+                <th>Image</th>
+                <th>Points</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="history-table-body">
+              <!-- Table content will be populated by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="pagination">
+          <button class="pagination-btn" id="prev-page">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <div class="pagination-pages" id="pagination-pages">
+            <button class="page-number active">1</button>
+            <button class="page-number">2</button>
+            <button class="page-number">3</button>
+          </div>
+          <button class="pagination-btn" id="next-page">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Redeem Points Section -->
+      <div class="dashboard-content hidden" id="redeem">
+        <h1 class="page-title">Redeem Points</h1>
+        
+        <div class="points-balance-card">
+          <div class="points-balance">
+            <h2>Your Points Balance</h2>
+            <div class="balance-amount">
+              <i class="fas fa-coins"></i>
+              <span id="available-points">245</span>
+            </div>
+            <p>You can redeem your points at partner stores or exchange for cash rewards.</p>
+          </div>
+        </div>
+        
+        <h2 class="section-subtitle">Available Rewards</h2>
+        
+        <div class="redeem-options">
+          <div class="redeem-category-tabs">
+            <button class="category-tab active" data-category="all">All</button>
+            <button class="category-tab" data-category="retail">Retail</button>
+            <button class="category-tab" data-category="food">Food & Beverage</button>
+            <button class="category-tab" data-category="cash">Cash Rewards</button>
+          </div>
+          
+          <div class="redeem-cards">
+            <div class="redeem-card" data-category="retail">
+              <div class="redeem-card-header">
+                <div class="partner-logo">
+                  <i class="fas fa-tshirt"></i>
+                </div>
+                <div class="points-required">50 points</div>
+              </div>
+              <div class="redeem-card-body">
+                <h3>Sustainable Styles</h3>
+                <p>$5 discount voucher for eco-friendly clothing</p>
+              </div>
+              <div class="redeem-card-footer">
+                <button class="btn primary redeem-btn" data-points="50" data-partner="Sustainable Styles" data-reward="$5 discount voucher">Redeem</button>
+              </div>
+            </div>
+            
+            <div class="redeem-card" data-category="food">
+              <div class="redeem-card-header">
+                <div class="partner-logo">
+                  <i class="fas fa-coffee"></i>
+                </div>
+                <div class="points-required">30 points</div>
+              </div>
+              <div class="redeem-card-body">
+                <h3>Eco Cafe</h3>
+                <p>Free coffee with any sandwich purchase</p>
+              </div>
+              <div class="redeem-card-footer">
+                <button class="btn primary redeem-btn" data-points="30" data-partner="Eco Cafe" data-reward="Free coffee">Redeem</button>
+              </div>
+            </div>
+            
+            <div class="redeem-card" data-category="retail">
+              <div class="redeem-card-header">
+                <div class="partner-logo">
+                  <i class="fas fa-store"></i>
+                </div>
+                <div class="points-required">100 points</div>
+              </div>
+              <div class="redeem-card-body">
+                <h3>GreenMart</h3>
+                <p>$10 shopping voucher for groceries</p>
+              </div>
+              <div class="redeem-card-footer">
+                <button class="btn primary redeem-btn" data-points="100" data-partner="GreenMart" data-reward="$10 shopping voucher">Redeem</button>
+              </div>
+            </div>
+            
+            <div class="redeem-card" data-category="cash">
+              <div class="redeem-card-header">
+                <div class="partner-logo">
+                  <i class="fas fa-money-bill-wave"></i>
+                </div>
+                <div class="points-required">200 points</div>
+              </div>
+              <div class="redeem-card-body">
+                <h3>Cash Reward</h3>
+                <p>$20 transferred to your bank account</p>
+              </div>
+              <div class="redeem-card-footer">
+                <button class="btn primary redeem-btn" data-points="200" data-partner="Cash Reward" data-reward="$20 transfer">Redeem</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="redemption-history">
+          <h2 class="section-subtitle">Redemption History</h2>
+          <table class="redemption-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Partner</th>
+                <th>Reward</th>
+                <th>Points Used</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="redemption-table-body">
+              <!-- Table content will be populated by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <!-- Leaderboard Section -->
+      <div class="dashboard-content hidden" id="leaderboard">
+        <h1 class="page-title">Eco-Leaderboard</h1>
+        
+        <div class="leaderboard-container">
+          <div class="leaderboard-top">
+            <div class="leader rank-2">
+              <div class="rank-badge">2</div>
+              <div class="leader-avatar">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="leader-name">Emma S.</div>
+              <div class="leader-points">583 pts</div>
+            </div>
+            <div class="leader rank-1">
+              <div class="rank-badge">1</div>
+              <div class="leader-avatar">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="leader-name">Michael T.</div>
+              <div class="leader-points">672 pts</div>
+            </div>
+            <div class="leader rank-3">
+              <div class="rank-badge">3</div>
+              <div class="leader-avatar">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="leader-name">Sarah J.</div>
+              <div class="leader-points">471 pts</div>
+            </div>
+          </div>
+          
+          <div class="leaderboard-table-container">
+            <table class="leaderboard-table">
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>User</th>
+                  <th>Waste Uploads</th>
+                  <th>Points</th>
+                </tr>
+              </thead>
+              <tbody id="leaderboard-table-body">
+                <!-- Table content will be populated by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  
+  <!-- Modal Templates -->
+  <div class="modal-container" id="edit-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Edit Waste Entry</h2>
+        <button class="close-modal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="edit-waste-type">Waste Type</label>
+          <select id="edit-waste-type">
+            <option value="plastic">Plastic</option>
+            <option value="metal">Metal</option>
+            <option value="organic">Organic</option>
+            <option value="e-waste">E-Waste</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="edit-waste-notes">Notes</label>
+          <textarea id="edit-waste-notes" rows="3" placeholder="Add any notes about your waste..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn secondary" id="cancel-edit">Cancel</button>
+        <button class="btn primary" id="save-edit">Save Changes</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal-container" id="redeem-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Confirm Redemption</h2>
+        <button class="close-modal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="redemption-details">
+          <p>You are about to redeem <span id="redemption-points">0</span> points for:</p>
+          <div class="redemption-reward">
+            <i class="fas fa-gift"></i>
+            <h3 id="redemption-title">Reward Title</h3>
+          </div>
+          <p id="redemption-description">Reward description</p>
+          <div class="form-group">
+            <label for="redemption-method">Redemption Method</label>
+            <select id="redemption-method">
+              <option value="qr">Generate QR Code</option>
+              <option value="upi">UPI Transfer</option>
+            </select>
+          </div>
+          <div class="upi-field hidden">
+            <label for="upi-id">UPI ID</label>
+            <input type="text" id="upi-id" placeholder="yourname@upi">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn secondary" id="cancel-redeem">Cancel</button>
+        <button class="btn primary" id="confirm-redeem">Confirm Redemption</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal-container" id="delete-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Delete Waste Entry</h2>
+        <button class="close-modal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this waste entry? This action cannot be undone.</p>
+        <div class="delete-warning">
+          <i class="fas fa-exclamation-triangle"></i>
+          <p>You will lose <span id="delete-points">0</span> points from your account.</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn secondary" id="cancel-delete">Cancel</button>
+        <button class="btn danger" id="confirm-delete">Delete Entry</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- QR Code Modal -->
+  <div class="modal-container" id="qr-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Scan QR Code</h2>
+        <button class="close-modal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="qr-container">
+          <div class="qr-placeholder" id="qr-placeholder">
+            <div class="qr-frame">
+              <div class="qr-grid"></div>
+            </div>
+          </div>
+          <div class="qr-details">
+            <h3 id="qr-partner">Partner Name</h3>
+            <p id="qr-reward">Reward description</p>
+            <p class="qr-expiry">Valid for: <span id="qr-validity">24 hours</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn secondary" id="close-qr">Close</button>
+        <button class="btn primary" id="download-qr">
+          <i class="fas fa-download"></i> Download QR
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Toast Notification -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="js/main.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/customer-dashboard.js"></script>
+</body>
+</html>
